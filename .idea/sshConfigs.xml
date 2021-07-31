@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="SshConfigs">
+    <configs>
+      <sshConfig host="15.165.86.139" id="530f5d15-4bb8-4bfc-8e4d-f6efd86359c8" keyPath="$PROJECT_DIR$/../hardy_server_yogiyo.pem" port="22" nameFormat="DESCRIPTIVE" username="ubuntu" />
+    </configs>
+  </component>
+</project>

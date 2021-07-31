@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="dddd8e16-43fe-42a0-9dc0-2525b8708d81" name="yogiyo-server" url="http://15.165.86.139">
+        <fileTransfer rootFolder="/var/www/yogiyoA-server" accessType="SFTP" host="15.165.86.139" port="22" sshConfigId="530f5d15-4bb8-4bfc-8e4d-f6efd86359c8" sshConfig="ubuntu@15.165.86.139:22 key" keyPair="true">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>
