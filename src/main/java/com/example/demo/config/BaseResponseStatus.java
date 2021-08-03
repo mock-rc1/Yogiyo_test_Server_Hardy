@@ -34,7 +34,10 @@ public enum BaseResponseStatus {
     POST_USERS_EMPTY_PASSWORD(false, 2019, "비밀번호를 입력해주세요."),
     POST_USERS_INVALID_PASSWORD(false, 2020, "영문/숫자/특수문자 중 2가지 이상을 조합한 8~20자 비밀번호로 입력해주세요."),
     POST_USERS_LENGTH_USERNAME(false, 2021, "닉네임은 45자 이하이어야 합니다."),
-
+    POST_USERS_MANDATORY_TERMS(false, 2022, "이용약관에 동의하셔야 합니다."),
+    POST_USERS_MANDATORY_INFO(false, 2023, "개인정보 수집 및 이용 동의를 하셔야 합니다."),
+    POST_USERS_MANDATORY_TRANS(false, 2024, "전자금융거래 이용약관에 동의하셔야 합니다."),
+    POST_USERS_MANDATORY_FOURTEEN(false, 2025, "만 14세 이상 이용자만 가입이 가능합니다."),
 
 
     /**

@@ -40,8 +40,15 @@ public class UserService {
         //중복
         if(userProvider.checkEmail(postUserReq.getUserEmail()) ==1){
             throw new BaseException(POST_USERS_EXISTS_EMAIL);
+        } else if(postUserReq.getTermsAndConditions() != 1){
+            throw new BaseException(POST_USERS_MANDATORY_TERMS);
+        } else if(postUserReq.getPersonalInfo() != 1) {
+            throw new BaseException(POST_USERS_MANDATORY_INFO);
+        } else if(postUserReq.getFinancialTrans() != 1) {
+            throw new BaseException(POST_USERS_MANDATORY_TRANS);
+        } else if(postUserReq.getAboveFourteen() != 1) {
+            throw new BaseException(POST_USERS_MANDATORY_FOURTEEN);
         }
-
         String pwd;
         try{
             //암호화

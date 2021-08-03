@@ -11,4 +11,9 @@ public class PostUserReq {
     private String userEmail;
     private String userPassword;
     private String userNickname;
+    private Integer termsAndConditions;
+    private Integer personalInfo;
+    private Integer financialTrans;
+    private Integer aboveFourteen;
+    private Integer benefitAlarm;
 }
