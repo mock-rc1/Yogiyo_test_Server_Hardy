@@ -37,49 +37,11 @@ public class UserController {
         this.jwtService = jwtService;
     }
 
-//    /**
-//     * 회원 조회 API
-//     * [GET] /users
-//     * 회원 번호 및 이메일 검색 조회 API
-//     * [GET] /users? Email=
-//     * @return BaseResponse<List<GetUserRes>>
-//     */
-//    //Query String
-//    @ResponseBody
-//    @GetMapping("") // (GET) 127.0.0.1:9000/app/users
-//    public BaseResponse<List<GetUserRes>> getUsers(@RequestParam(required = false) String Email) {
-//        try{
-//            if(Email == null){
-//                List<GetUserRes> getUsersRes = userProvider.getUsers();
-//                return new BaseResponse<>(getUsersRes);
-//            }
-//            // Get Users
-//            List<GetUserRes> getUsersRes = userProvider.getUsersByEmail(Email);
-//            return new BaseResponse<>(getUsersRes);
-//        } catch(BaseException exception){
-//            return new BaseResponse<>((exception.getStatus()));
-//        }
-//    }
-//
-//    /**
-//     * 회원 1명 조회 API
-//     * [GET] /users/:userIdx
-//     * @return BaseResponse<GetUserRes>
-//     */
-//    // Path-variable
-//    @ResponseBody
-//    @GetMapping("/{userIdx}") // (GET) 127.0.0.1:9000/app/users/:userIdx
-//    public BaseResponse<GetUserRes> getUser(@PathVariable("userIdx") int userIdx) {
-//        // Get Users
-//        try{
-//            GetUserRes getUserRes = userProvider.getUser(userIdx);
-//            return new BaseResponse<>(getUserRes);
-//        } catch(BaseException exception){
-//            return new BaseResponse<>((exception.getStatus()));
-//        }
-//
-//    }
-
+    /**
+     * 1. 회원가입 API
+     * [POST] /users
+     * @return BaseResponse<PostUserRes>
+     */
     @ResponseBody
     @PostMapping("")
     public BaseResponse<PostUserRes> createUser(@RequestBody PostUserReq postUserReq) {
@@ -104,12 +66,12 @@ public class UserController {
         }
     }
     /**
-     * 이메일 로그인 API
+     * 2. 이메일 로그인 API
      * [POST] /users/email-logIn
      * @return BaseResponse<PostLoginRes>
      */
     @ResponseBody
-    @PostMapping("/email-logIn")
+    @PostMapping("/email-login")
     public BaseResponse<PostLoginRes> logIn(@RequestBody PostLoginReq postLoginReq){
         try{
             if(postLoginReq.getUserEmail() == null){
@@ -129,32 +91,23 @@ public class UserController {
             return new BaseResponse<>(exception.getStatus());
         }
     }
-//
-//    /**
-//     * 유저정보변경 API
-//     * [PATCH] /users/:userIdx
-//     * @return BaseResponse<String>
-//     */
-//    @ResponseBody
-//    @PatchMapping("/{userIdx}")
-//    public BaseResponse<String> modifyUserName(@PathVariable("userIdx") int userIdx, @RequestBody User user){
-//        try {
-//            //jwt에서 idx 추출.
-//            int userIdxByJwt = jwtService.getUserIdx();
-//            //userIdx와 접근한 유저가 같은지 확인
-//            if(userIdx != userIdxByJwt){
-//                return new BaseResponse<>(INVALID_USER_JWT);
-//            }
-//            //같다면 유저네임 변경
-//            PatchUserReq patchUserReq = new PatchUserReq(userIdx,user.getUserName());
-//            userService.modifyUserName(patchUserReq);
-//
-//            String result = "";
-//        return new BaseResponse<>(result);
-//        } catch (BaseException exception) {
-//            return new BaseResponse<>((exception.getStatus()));
-//        }
-//    }
 
-
+    /**
+     * 3. 자동로그인 API
+     * [GET] /users/:userIdx/auto-login
+     * @return BaseResponse<CheckAutoLoginRes>
+     */
+    @ResponseBody
+    @GetMapping("/{userIdx}/auto-login")
+    public BaseResponse<AutoLoginRes> AutoLogin(@PathVariable int userIdx) {
+        try {
+            int userIdxByJwt = jwtService.getUserIdx();
+            if (userIdx != userIdxByJwt) {
+                return new BaseResponse(FAIL_LOGIN);
+            }
+            return new BaseResponse<>(new AutoLoginRes(1));
+        } catch (BaseException exception) {
+            return new BaseResponse<>(FAIL_LOGIN);
+        }
+    }
 }

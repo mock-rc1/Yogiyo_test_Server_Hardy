@@ -19,52 +19,13 @@ public class UserDao {
         this.jdbcTemplate = new JdbcTemplate(dataSource);
     }
 
-//    public List<GetUserRes> getUsers(){
-//        String getUsersQuery = "select * from UserInfo";
-//        return this.jdbcTemplate.query(getUsersQuery,
-//                (rs,rowNum) -> new GetUserRes(
-//                        rs.getInt("userIdx"),
-//                        rs.getString("userName"),
-//                        rs.getString("ID"),
-//                        rs.getString("Email"),
-//                        rs.getString("password"))
-//                );
-//    }
-//
-//    public List<GetUserRes> getUsersByEmail(String email){
-//        String getUsersByEmailQuery = "select * from UserInfo where email =?";
-//        String getUsersByEmailParams = email;
-//        return this.jdbcTemplate.query(getUsersByEmailQuery,
-//                (rs, rowNum) -> new GetUserRes(
-//                        rs.getInt("userIdx"),
-//                        rs.getString("userName"),
-//                        rs.getString("ID"),
-//                        rs.getString("Email"),
-//                        rs.getString("password")),
-//                getUsersByEmailParams);
-//    }
-//
-//    public GetUserRes getUser(int userIdx){
-//        String getUserQuery = "select * from UserInfo where userIdx = ?";
-//        int getUserParams = userIdx;
-//        return this.jdbcTemplate.queryForObject(getUserQuery,
-//                (rs, rowNum) -> new GetUserRes(
-//                        rs.getInt("userIdx"),
-//                        rs.getString("userName"),
-//                        rs.getString("ID"),
-//                        rs.getString("Email"),
-//                        rs.getString("password")),
-//                getUserParams);
-//    }
-    
-
     public int createUser(PostUserReq postUserReq){
         String createUserQuery = "insert into User (userEmail, userPassword, userNickname) VALUES (?,?,?)";
         Object[] createUserParams = new Object[]{postUserReq.getUserEmail(), postUserReq.getUserPassword(), postUserReq.getUserNickname()};
         this.jdbcTemplate.update(createUserQuery, createUserParams);
 
-        String lastInserIdQuery = "select last_insert_id()";
-        return this.jdbcTemplate.queryForObject(lastInserIdQuery,int.class);
+        String lastInsertIdQuery = "select last_insert_id()";
+        return this.jdbcTemplate.queryForObject(lastInsertIdQuery,int.class);
     }
 
     public int checkEmail(String email){
@@ -75,13 +36,6 @@ public class UserDao {
                 checkEmailParams);
     }
 
-//    public int modifyUserName(PatchUserReq patchUserReq){
-//        String modifyUserNameQuery = "update UserInfo set userName = ? where userIdx = ? ";
-//        Object[] modifyUserNameParams = new Object[]{patchUserReq.getUserName(), patchUserReq.getUserIdx()};
-//
-//        return this.jdbcTemplate.update(modifyUserNameQuery,modifyUserNameParams);
-//    }
-//
     public User getPwd(PostLoginReq postLoginReq){
         String getPwdQuery = "select userIdx, userEmail, userName, userPassword, userNickname, userPhoneNum, userAddress, storeBoss, status from User where userEmail = ?";
         String getPwdParams = postLoginReq.getUserEmail();
