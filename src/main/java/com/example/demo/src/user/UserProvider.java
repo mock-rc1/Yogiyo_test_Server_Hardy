@@ -31,35 +31,35 @@ public class UserProvider {
         this.jwtService = jwtService;
     }
 
-    public List<GetUserRes> getUsers() throws BaseException{
-        try{
-            List<GetUserRes> getUserRes = userDao.getUsers();
-            return getUserRes;
-        }
-        catch (Exception exception) {
-            throw new BaseException(DATABASE_ERROR);
-        }
-    }
+//    public List<GetUserRes> getUsers() throws BaseException{
+//        try{
+//            List<GetUserRes> getUserRes = userDao.getUsers();
+//            return getUserRes;
+//        }
+//        catch (Exception exception) {
+//            throw new BaseException(DATABASE_ERROR);
+//        }
+//    }
+//
+//    public List<GetUserRes> getUsersByEmail(String email) throws BaseException{
+//        try{
+//            List<GetUserRes> getUsersRes = userDao.getUsersByEmail(email);
+//            return getUsersRes;
+//        }
+//        catch (Exception exception) {
+//            throw new BaseException(DATABASE_ERROR);
+//        }
+//                    }
 
-    public List<GetUserRes> getUsersByEmail(String email) throws BaseException{
-        try{
-            List<GetUserRes> getUsersRes = userDao.getUsersByEmail(email);
-            return getUsersRes;
-        }
-        catch (Exception exception) {
-            throw new BaseException(DATABASE_ERROR);
-        }
-                    }
 
-
-    public GetUserRes getUser(int userIdx) throws BaseException {
-        try {
-            GetUserRes getUserRes = userDao.getUser(userIdx);
-            return getUserRes;
-        } catch (Exception exception) {
-            throw new BaseException(DATABASE_ERROR);
-        }
-    }
+//    public GetUserRes getUser(int userIdx) throws BaseException {
+//        try {
+//            GetUserRes getUserRes = userDao.getUser(userIdx);
+//            return getUserRes;
+//        } catch (Exception exception) {
+//            throw new BaseException(DATABASE_ERROR);
+//        }
+//    }
 
     public int checkEmail(String email) throws BaseException{
         try{
@@ -70,15 +70,23 @@ public class UserProvider {
     }
 
     public PostLoginRes logIn(PostLoginReq postLoginReq) throws BaseException{
+        if (userDao.checkEmail(postLoginReq.getUserEmail()) == 0) {  //ID를 가진 활성 유저가 없다.
+            if (userDao.checkQuitUser(postLoginReq.getUserEmail()) == 1) { //탈퇴한 회원이라면
+                throw new BaseException(QUIT_USER);
+            } else {
+                // 활성유저도 아니고 탈퇴한 회원도 아니라면 로그인 X
+                throw new BaseException(FAILED_TO_LOGIN);
+            }
+        }
         User user = userDao.getPwd(postLoginReq);
         String password;
         try {
-            password = new AES128(Secret.USER_INFO_PASSWORD_KEY).decrypt(user.getPassword());
+            password = new AES128(Secret.USER_INFO_PASSWORD_KEY).decrypt(user.getUserPassword());
         } catch (Exception ignored) {
             throw new BaseException(PASSWORD_DECRYPTION_ERROR);
         }
 
-        if(postLoginReq.getPassword().equals(password)){
+        if(postLoginReq.getUserPassword().equals(password)){
             int userIdx = userDao.getPwd(postLoginReq).getUserIdx();
             String jwt = jwtService.createJwt(userIdx);
             return new PostLoginRes(userIdx,jwt);
@@ -88,5 +96,7 @@ public class UserProvider {
         }
 
     }
+
+
 
 }

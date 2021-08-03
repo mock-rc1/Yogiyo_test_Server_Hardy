@@ -29,6 +29,10 @@ public enum BaseResponseStatus {
     POST_USERS_EMPTY_EMAIL(false, 2015, "이메일을 입력해주세요."),
     POST_USERS_INVALID_EMAIL(false, 2016, "이메일 형식을 확인해주세요."),
     POST_USERS_EXISTS_EMAIL(false,2017,"중복된 이메일입니다."),
+    POST_USERS_LENGTH_EMAIL(false,2018,"이메일 길이는 45자 이하이어야 합니다."),
+    POST_USERS_EMPTY_PASSWORD(false, 2019, "비밀번호를 입력해주세요."),
+    POST_USERS_INVALID_PASSWORD(false, 2020, "영문/숫자/특수문자 중 2가지 이상을 조합한 8~20자 비밀번호로 입력해주세요."),
+    POST_USERS_LENGTH_USERNAME(false, 2021, "닉네임은 45자 이하이어야 합니다."),
 
 
 
@@ -41,7 +45,7 @@ public enum BaseResponseStatus {
     // [POST] /users
     DUPLICATED_EMAIL(false, 3013, "중복된 이메일입니다."),
     FAILED_TO_LOGIN(false,3014,"없는 아이디거나 비밀번호가 틀렸습니다."),
-
+    QUIT_USER(false,3015,"탈퇴한 유저입니다."),
 
 
     /**
