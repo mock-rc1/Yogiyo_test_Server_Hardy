@@ -32,6 +32,8 @@ com/example/demo/src/user/model/GetUserRes.java
  com.example.demo.src.user.model.GetUserRes
 com/example/demo/src/user/model/AutoLoginRes.java
  com.example.demo.src.user.model.AutoLoginRes
+com/example/demo/src/store/model/GetStoreRes.java
+ com.example.demo.src.store.model.GetStoreRes
 com/example/demo/config/BaseException.java
  com.example.demo.config.BaseException
 com/example/demo/DemoApplication.java
