@@ -29,7 +29,7 @@ public class StoreDao {
     }
 
     public List<GetStoreCategoryRes> getStoreCategories(){
-        String getStoreCategoriesQuery = "SELECT storeIdx, categoryIdx, storeName, storeRating, deliveryTime, deliveryTip, storeAddress\n" +
+        String getStoreCategoriesQuery = "SELECT storeIdx, categoryIdx, storeName, storeRating, deliveryTime, deliveryTip, storeAddress, storeImageUrl, storeLogoUrl\n" +
                 "FROM Store;";
         return this.jdbcTemplate.query(getStoreCategoriesQuery,
                 (rs, rowNum) -> new GetStoreCategoryRes(
@@ -39,12 +39,14 @@ public class StoreDao {
                         rs.getString("storeRating"),
                         rs.getString("deliveryTime"),
                         rs.getString("deliveryTip"),
-                        rs.getString("storeAddress"))
+                        rs.getString("storeAddress"),
+                        rs.getString("storeImageUrl"),
+                        rs.getString("storeLogoUrl"))
                 );
     }
 
     public List<GetStoreCategoryRes> getStoreCategoriesById(Integer categoryIdx){
-        String getStoreCategoriesByIdQuery = "SELECT storeIdx, categoryIdx, storeName, storeRating, deliveryTime, deliveryTip, storeAddress\n" +
+        String getStoreCategoriesByIdQuery = "SELECT storeIdx, categoryIdx, storeName, storeRating, deliveryTime, deliveryTip, storeAddress, storeImageUrl, storeLogoUrl\n" +
                 "FROM Store WHERE categoryIdx =?";
         Integer getStoreCategoriesByIdParams = categoryIdx;
         return this.jdbcTemplate.query(getStoreCategoriesByIdQuery,
@@ -55,7 +57,9 @@ public class StoreDao {
                         rs.getString("storeRating"),
                         rs.getString("deliveryTime"),
                         rs.getString("deliveryTip"),
-                        rs.getString("storeAddress")),
+                        rs.getString("storeAddress"),
+                        rs.getString("storeImageUrl"),
+                        rs.getString("storeLogoUrl")),
                 getStoreCategoriesByIdParams);
     }
 }

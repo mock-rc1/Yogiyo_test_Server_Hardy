@@ -15,4 +15,6 @@ public class GetStoreCategoryRes {
     public String deliveryTime;
     public String deliveryTip;
     public String storeAddress;
+    public String storeImageUrl;
+    public String storeLogoUrl;
 }
