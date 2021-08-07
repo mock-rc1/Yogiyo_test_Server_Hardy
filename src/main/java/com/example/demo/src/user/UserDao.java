@@ -64,4 +64,22 @@ public class UserDao {
         return this.jdbcTemplate.queryForObject(checkQuitUserQuery, int.class, checkQuitUserParams);
     }
 
+    public GetUserRes getUser(int userIdx){
+        String getUserQuery = "select userIdx, userEmail, userPhoneNum, userNickname from User where userIdx = ?";
+        int getUserParams = userIdx;
+        return this.jdbcTemplate.queryForObject(getUserQuery,
+                (rs, rowNum) -> new GetUserRes(
+                        rs.getInt("userIdx"),
+                        rs.getString("userEmail"),
+                        rs.getString("userPhoneNum"),
+                        rs.getString("userNickname")),
+                getUserParams);
+    }
+
+    public int modifyUserName(PatchUserReq patchUserReq){
+        String modifyUserNameQuery = "update User set userNickname = ? where userIdx = ? ";
+        Object[] modifyUserNameParams = new Object[]{patchUserReq.getUserNickname(), patchUserReq.getUserIdx()};
+
+        return this.jdbcTemplate.update(modifyUserNameQuery,modifyUserNameParams);
+    }
 }

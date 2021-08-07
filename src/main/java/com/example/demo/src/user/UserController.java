@@ -111,5 +111,48 @@ public class UserController {
         }
     }
 
+    /**
+     * 6. 유저 정보 조회 API
+     * [GET] /users/email-login/:userIdx
+     * @return BaseResponse<GetUserRes>
+     */
 
+    @ResponseBody
+    @GetMapping("/email-login/{userIdx}") // (GET) 127.0.0.1:9000/app/users/:userIdx
+    public BaseResponse<GetUserRes> getUser(@PathVariable("userIdx") int userIdx) {
+        try{
+            int userIdxByJwt = jwtService.getUserIdx();
+            if (userIdx != userIdxByJwt) {
+                return new BaseResponse(FAIL_LOGIN);
+            }
+            GetUserRes getUserRes = userProvider.getUser(userIdx);
+            return new BaseResponse<>(getUserRes);
+        } catch(BaseException exception){
+            return new BaseResponse<>((exception.getStatus()));
+        }
+
+    }
+
+    /**
+     * 7. 유저 닉네임 변경 API
+     * [PATCH] /users/email-login/:userIdx
+     * @return BaseResponse<String>
+     */
+    @ResponseBody
+    @PatchMapping("/email-login/{userIdx}")
+    public BaseResponse<String> modifyUserName(@PathVariable("userIdx") int userIdx, @RequestBody User user){
+        try{
+            int userIdxByJwt = jwtService.getUserIdx();
+            if (userIdx != userIdxByJwt) {
+                return new BaseResponse(FAIL_LOGIN);
+            }
+            PatchUserReq patchUserReq = new PatchUserReq(userIdx, user.getUserNickname());
+            userService.modifyUserName(patchUserReq);
+
+            String result = "";
+            return new BaseResponse<>(result);
+        } catch (BaseException exception) {
+            return new BaseResponse<>((exception.getStatus()));
+        }
+    }
 }
