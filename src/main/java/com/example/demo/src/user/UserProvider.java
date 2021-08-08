@@ -59,7 +59,9 @@ public class UserProvider {
         if(postLoginReq.getUserPassword().equals(password)){
             int userIdx = userDao.getPwd(postLoginReq).getUserIdx();
             String jwt = jwtService.createJwt(userIdx);
-            return new PostLoginRes(userIdx,jwt);
+            String star = "*";
+            String passwordStar = star.repeat(password.length());
+            return new PostLoginRes(userIdx,jwt,passwordStar);
         }
         else{
             throw new BaseException(FAILED_TO_LOGIN);
@@ -81,7 +83,7 @@ public class UserProvider {
         PostUserReq kakaoSignUp = new PostUserReq(kaKaoUserInfo.getEmail(), null, kaKaoUserInfo.getUserName(),null, null, null, null, null);
         userIdx = userDao.createUser(kakaoSignUp);
         jwt = jwtService.createJwt(userIdx);
-        return new PostLoginRes(userIdx, jwt);
+        return new PostLoginRes(userIdx, jwt, null);
     }
 
 

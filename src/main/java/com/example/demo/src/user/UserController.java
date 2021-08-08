@@ -68,7 +68,7 @@ public class UserController {
     }
     /**
      * 2. 이메일 로그인 API
-     * [POST] /users/email-logIn
+     * [POST] /users/email-login
      * @return BaseResponse<PostLoginRes>
      */
     @ResponseBody
@@ -164,7 +164,7 @@ public class UserController {
      */
     @ResponseBody
     @PostMapping("/users/kakao-login")
-    public BaseResponse<PostLoginRes> kakaoLogin(@RequestBody PostKakaoLoginReq postKakaoLogin) {
+    public BaseResponse<PostLoginRes> kakaoLogin(@RequestBody PostKaKaoLoginReq postKakaoLogin) {
         if (postKakaoLogin.getAccessToken() == null || postKakaoLogin.getAccessToken().isEmpty()) {
             return new BaseResponse<>(AUTH_KAKAO_EMPTY_TOKEN);
         }

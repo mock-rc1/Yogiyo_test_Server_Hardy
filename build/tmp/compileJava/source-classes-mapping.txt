@@ -1,3 +1,5 @@
+com/example/demo/src/menu/MenuProvider.java
+ com.example.demo.src.menu.MenuProvider
 com/example/demo/src/user/model/KaKaoUserInfo.java
  com.example.demo.src.user.model.KaKaoUserInfo
 com/example/demo/src/store/StoreDao.java
@@ -6,6 +8,8 @@ com/example/demo/src/user/model/PostUserReq.java
  com.example.demo.src.user.model.PostUserReq
 com/example/demo/config/Constant.java
  com.example.demo.config.Constant
+com/example/demo/src/menu/MenuService.java
+ com.example.demo.src.menu.MenuService
 com/example/demo/utils/ValidationRegex.java
  com.example.demo.utils.ValidationRegex
 com/example/demo/src/user/model/PostLoginRes.java
@@ -26,8 +30,6 @@ com/example/demo/src/WebSecurityConfig.java
  com.example.demo.src.WebSecurityConfig
 com/example/demo/src/test/TestController.java
  com.example.demo.src.test.TestController
-com/example/demo/src/user/model/PostKakaoLoginReq.java
- com.example.demo.src.user.model.PostKakaoLoginReq
 com/example/demo/src/user/model/PostLoginReq.java
  com.example.demo.src.user.model.PostLoginReq
 com/example/demo/utils/KakaoApiService.java
@@ -52,6 +54,8 @@ com/example/demo/src/user/UserService.java
  com.example.demo.src.user.UserService
 com/example/demo/src/user/model/GetUserRes.java
  com.example.demo.src.user.model.GetUserRes
+com/example/demo/src/menu/model/GetMenuRes.java
+ com.example.demo.src.menu.model.GetMenuRes
 com/example/demo/src/store/model/GetStoreCategoryRes.java
  com.example.demo.src.store.model.GetStoreCategoryRes
 com/example/demo/src/user/model/AutoLoginRes.java
@@ -60,7 +64,11 @@ com/example/demo/config/BaseException.java
  com.example.demo.config.BaseException
 com/example/demo/DemoApplication.java
  com.example.demo.DemoApplication
+com/example/demo/src/user/model/PostKaKaoLoginReq.java
+ com.example.demo.src.user.model.PostKaKaoLoginReq
 com/example/demo/utils/JwtService.java
  com.example.demo.utils.JwtService
 com/example/demo/src/user/UserProvider.java
  com.example.demo.src.user.UserProvider
+com/example/demo/src/menu/MenuDao.java
+ com.example.demo.src.menu.MenuDao
