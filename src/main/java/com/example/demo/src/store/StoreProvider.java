@@ -58,4 +58,13 @@ public class StoreProvider {
             throw new BaseException(DATABASE_ERROR);
         }
     }
+
+    public GetStoreRes getStore(int storeIdx) throws BaseException {
+        try {
+            GetStoreRes getStoreRes = storeDao.getStore(storeIdx);
+            return getStoreRes;
+        } catch (Exception exception) {
+            throw new BaseException(DATABASE_ERROR);
+        }
+    }
 }

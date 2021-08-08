@@ -75,4 +75,15 @@ public class UserProvider {
         }
     }
 
+    public PostLoginRes kakaoLogin(KaKaoUserInfo kaKaoUserInfo) throws BaseException {
+        int userIdx;
+        String jwt;
+        PostUserReq kakaoSignUp = new PostUserReq(kaKaoUserInfo.getEmail(), null, kaKaoUserInfo.getUserName(),null, null, null, null, null);
+        userIdx = userDao.createUser(kakaoSignUp);
+        jwt = jwtService.createJwt(userIdx);
+        return new PostLoginRes(userIdx, jwt);
+    }
+
+
+
 }

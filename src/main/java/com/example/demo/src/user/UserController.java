@@ -1,5 +1,6 @@
 package com.example.demo.src.user;
 
+import com.example.demo.utils.KakaoApiService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import com.example.demo.config.BaseException;
@@ -112,7 +113,7 @@ public class UserController {
     }
 
     /**
-     * 6. 유저 정보 조회 API
+     * 7. 유저 정보 조회 API
      * [GET] /users/email-login/:userIdx
      * @return BaseResponse<GetUserRes>
      */
@@ -134,7 +135,7 @@ public class UserController {
     }
 
     /**
-     * 7. 유저 닉네임 변경 API
+     * 8. 유저 닉네임 변경 API
      * [PATCH] /users/email-login/:userIdx
      * @return BaseResponse<String>
      */
@@ -153,6 +154,31 @@ public class UserController {
             return new BaseResponse<>(result);
         } catch (BaseException exception) {
             return new BaseResponse<>((exception.getStatus()));
+        }
+    }
+
+    /**
+     * 9. 카카오 로그인 API
+     * [POST] /users/kakao-login
+     * @return BaseResponse<String>
+     */
+    @ResponseBody
+    @PostMapping("/users/kakao-login")
+    public BaseResponse<PostLoginRes> kakaoLogin(@RequestBody PostKakaoLoginReq postKakaoLogin) {
+        if (postKakaoLogin.getAccessToken() == null || postKakaoLogin.getAccessToken().isEmpty()) {
+            return new BaseResponse<>(AUTH_KAKAO_EMPTY_TOKEN);
+        }
+        try {
+            // 액세스 토큰으로 사용자 정보 받아온다.
+            KaKaoUserInfo kaKaoUserInfo = KakaoApiService.getKakaoUserInfo(postKakaoLogin.getAccessToken());
+
+            // 로그인 처리 or 회원가입 진행 후 jwt, userIdx 반환
+            PostLoginRes postLoginRes = userProvider.kakaoLogin(kaKaoUserInfo);
+            return new BaseResponse<>(postLoginRes);
+        } catch (BaseException exception) {
+            logger.warn("#3. " + exception.getStatus().getMessage());
+            logger.warn(postKakaoLogin.toString());
+            return new BaseResponse<>(exception.getStatus());
         }
     }
 }

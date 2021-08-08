@@ -38,7 +38,7 @@ public class StoreController {
     /**
      * 4. 메인화면 API
      * [GET] /stores
-     * @return BaseResponse<GetStoreRes>
+     * @return BaseResponse<GetCategoryRes>
      */
     @ResponseBody
     @GetMapping("")
@@ -58,7 +58,6 @@ public class StoreController {
      * [GET] /stores/categories?categoryIdx=
      * @return BaseResponse<List<GetStoreCategoryRes>>
      */
-
     @ResponseBody
     @GetMapping("/categories")
     public BaseResponse<List<GetStoreCategoryRes>> getStoreCategories(@RequestParam(required = false) Integer categoryIdx) {
@@ -73,4 +72,22 @@ public class StoreController {
             return new BaseResponse<>((exception.getStatus()));
         }
     }
+
+    /**
+     * 10. 가게 별 정보 조회 API
+     * [GET] /stores/:storeIdx
+     * @return BaseResponse<GetStoreRes>
+     */
+    @ResponseBody
+    @GetMapping("/{storeIdx}")
+    public BaseResponse<GetStoreRes> getStore(@PathVariable("storeIdx") int storeIdx) {
+        try {
+            GetStoreRes getStoreRes = storeProvider.getStore(storeIdx);
+            return new BaseResponse<>(getStoreRes);
+        } catch (BaseException exception) {
+            return new BaseResponse<>((exception.getStatus()));
+        }
+    }
+
+
 }

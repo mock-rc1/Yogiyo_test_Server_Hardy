@@ -62,4 +62,28 @@ public class StoreDao {
                         rs.getString("storeLogoUrl")),
                 getStoreCategoriesByIdParams);
     }
+
+    public GetStoreRes getStore(int storeIdx){
+        String getStoreQuery = "select storeIdx, categoryIdx, storeName, storeRating, deliveryTime, minOrderPrice, deliveryTip, storeOpenTime, storePhoneNum, storeAddress, businessName, businessLicenseNum, storeFoodInfo, isDeleted, status, storeImageUrl from Store where storeIdx = ?";
+        int getStoreParams = storeIdx;
+        return this.jdbcTemplate.queryForObject(getStoreQuery,
+                (rs, rowNum) -> new GetStoreRes(
+                        rs.getInt("storeIdx"),
+                        rs.getInt("categoryIdx"),
+                        rs.getString("storeName"),
+                        rs.getString("storeRating"),
+                        rs.getString("deliveryTime"),
+                        rs.getString("minOrderPrice"),
+                        rs.getString("deliveryTip"),
+                        rs.getString("storeOpenTime"),
+                        rs.getString("storePhoneNum"),
+                        rs.getString("storeAddress"),
+                        rs.getString("businessName"),
+                        rs.getString("businessLicenseNum"),
+                        rs.getString("storeFoodInfo"),
+                        rs.getString("isDeleted"),
+                        rs.getInt("status"),
+                        rs.getString("storeImageUrl")),
+                getStoreParams);
+    }
 }
