@@ -9,8 +9,9 @@ import lombok.Setter;
 @AllArgsConstructor
 public class GetMenuRes {
     public Integer menuIdx;
-    public Integer storeIdx;
     public String menuName;
+    public String menuPrice;
+    public String menuImageUrl;
+    public String menuInfo;
     public String menuCategory;
-
 }
