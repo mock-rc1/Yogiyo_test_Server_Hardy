@@ -59,9 +59,38 @@ public class UserProvider {
         if(postLoginReq.getUserPassword().equals(password)){
             int userIdx = userDao.getPwd(postLoginReq).getUserIdx();
             String jwt = jwtService.createJwt(userIdx);
+            return new PostLoginRes(userIdx,jwt);
+        }
+        else{
+            throw new BaseException(FAILED_TO_LOGIN);
+        }
+    }
+
+    public PostPatchRes logInPatch(PostLoginReq postLoginReq) throws BaseException{
+        if (userDao.checkEmail(postLoginReq.getUserEmail()) == 0) {  //ID를 가진 활성 유저가 없다.
+            if (userDao.checkQuitUser(postLoginReq.getUserEmail()) == 1) { //탈퇴한 회원이라면
+                throw new BaseException(QUIT_USER);
+            } else {
+                // 활성유저도 아니고 탈퇴한 회원도 아니라면 로그인 X
+                throw new BaseException(FAILED_TO_LOGIN);
+            }
+        }
+        User user = userDao.getPwd(postLoginReq);
+        String password;
+        try {
+            password = new AES128(Secret.USER_INFO_PASSWORD_KEY).decrypt(user.getUserPassword());
+        } catch (Exception ignored) {
+            throw new BaseException(PASSWORD_DECRYPTION_ERROR);
+        }
+
+        if(postLoginReq.getUserPassword().equals(password)){
+            int userIdx = userDao.getPwd(postLoginReq).getUserIdx();
+            String email = userDao.getUser(userIdx).getUserEmail();
+            String phoneNum = userDao.getUser(userIdx).getUserPhoneNum();
+            String nickname = userDao.getUser(userIdx).getUserNickname();
             String star = "*";
             String passwordStar = star.repeat(password.length());
-            return new PostLoginRes(userIdx,jwt,passwordStar);
+            return new PostPatchRes(userIdx,email,phoneNum,nickname,passwordStar);
         }
         else{
             throw new BaseException(FAILED_TO_LOGIN);
@@ -83,7 +112,7 @@ public class UserProvider {
         PostUserReq kakaoSignUp = new PostUserReq(kaKaoUserInfo.getEmail(), null, kaKaoUserInfo.getUserName(),null, null, null, null, null);
         userIdx = userDao.createUser(kakaoSignUp);
         jwt = jwtService.createJwt(userIdx);
-        return new PostLoginRes(userIdx, jwt, null);
+        return new PostLoginRes(userIdx, jwt);
     }
 
 
