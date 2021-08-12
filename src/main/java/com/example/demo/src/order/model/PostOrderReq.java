@@ -10,12 +10,12 @@ import lombok.Setter;
 public class PostOrderReq {
     private Integer menuIdx;
     private String menuName;
-    private String menuDetail;
+    private String menuInfo;
     private Integer menuQuantity;
-    private Integer totalPrice;
+    private String menuPrice;
     private String userAddress;
     private Integer storeIdx;
-    private Integer orderPrice;
+    private String totalPrice;
     private Integer deliveryTip;
     private String safeDelivery;
     private String tableware;

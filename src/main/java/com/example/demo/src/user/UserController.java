@@ -114,23 +114,22 @@ public class UserController {
 
     /**
      * 7. 유저 정보 조회 API
-     * [POST] /users/email-login/:userIdx
+     * [GET] /users/email-login/:userIdx
      * @return BaseResponse<GetUserRes>
      */
 
     @ResponseBody
-    @PostMapping("/email-login/{userIdx}") // (GET) 127.0.0.1:9000/app/users/:userIdx
-    public BaseResponse<PostPatchRes> getUser(@PathVariable("userIdx") int userIdx,
-                                            @RequestBody PostLoginReq postLoginReq) {
+    @GetMapping("/email-login/{userIdx}") // (GET) 127.0.0.1:9000/app/users/:userIdx
+    public BaseResponse<GetUserRes> getUser(@PathVariable("userIdx") int userIdx) {
         try{
             int userIdxByJwt = jwtService.getUserIdx();
             if (userIdx != userIdxByJwt) {
                 return new BaseResponse(FAIL_LOGIN);
             }
-            PostPatchRes postPatchRes = userProvider.logInPatch(postLoginReq);
-            return new BaseResponse<>(postPatchRes);
-        } catch (BaseException exception){
-            return new BaseResponse<>(exception.getStatus());
+            GetUserRes getUserRes = userProvider.getUser(userIdx);
+            return new BaseResponse<>(getUserRes);
+        } catch(BaseException exception){
+            return new BaseResponse<>((exception.getStatus()));
         }
 
     }
