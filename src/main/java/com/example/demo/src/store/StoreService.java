@@ -4,6 +4,7 @@ package com.example.demo.src.store;
 
 import com.example.demo.config.BaseException;
 import com.example.demo.config.secret.Secret;
+import com.example.demo.src.order.model.PatchOrderReq;
 import com.example.demo.src.store.model.*;
 import com.example.demo.utils.AES128;
 import com.example.demo.utils.JwtService;
@@ -32,5 +33,16 @@ public class StoreService {
         this.storeDao = storeDao;
         this.storeProvider = storeProvider;
         this.jwtService = jwtService;
+    }
+
+    public void deleteReview(PatchReviewReq patchReviewReq) throws BaseException {
+        try{
+            int result = storeDao.deleteReview(patchReviewReq);
+            if(result == 0){
+                throw new BaseException(MODIFY_FAIL_USERNAME);
+            }
+        } catch(Exception exception){
+            throw new BaseException(DATABASE_ERROR);
+        }
     }
 }

@@ -67,4 +67,14 @@ public class StoreProvider {
             throw new BaseException(DATABASE_ERROR);
         }
     }
+
+    public List<GetReviewRes> getReview(int storeIdx) throws BaseException{
+        try{
+            List<GetReviewRes> GetReviewsRes = storeDao.getReview(storeIdx);
+            return GetReviewsRes;
+        }
+        catch (Exception exception) {
+            throw new BaseException(DATABASE_ERROR);
+        }
+    }
 }

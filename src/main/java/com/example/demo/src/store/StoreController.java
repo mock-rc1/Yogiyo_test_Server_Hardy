@@ -1,5 +1,7 @@
 package com.example.demo.src.store;
 
+import com.example.demo.src.order.model.Order;
+import com.example.demo.src.order.model.PatchOrderReq;
 import com.example.demo.src.user.model.GetUserRes;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -89,5 +91,39 @@ public class StoreController {
         }
     }
 
+    /**
+     * 16. 리뷰 조회 API
+     * [GET] /stores/:storeIdx/reviews
+     * @return BaseResponse<List<GetReviewRes>>
+     */
+    @ResponseBody
+    @GetMapping("/{storeIdx}/reviews")
+    public BaseResponse<List<GetReviewRes>> getReview(@PathVariable("storeIdx") int storeIdx) {
+        try {
+            List<GetReviewRes> getReviewRes = storeProvider.getReview(storeIdx);
+            return new BaseResponse<>(getReviewRes);
+        } catch (BaseException exception) {
+            return new BaseResponse<>((exception.getStatus()));
+        }
+    }
+
+    /**
+     * 17. 리뷰 삭제 API
+     * [PATCH] /stores/:storeIdx/reviews/:reviewIdx
+     * @return BaseResponse<String>
+     */
+    @ResponseBody
+    @PatchMapping("/{storeIdx}/reviews/{reviewIdx}")
+    public BaseResponse<String> deleteReview(@PathVariable("storeIdx") int storeIdx, @PathVariable("reviewIdx") int reviewIdx, @RequestBody Review review){
+        try {
+            PatchReviewReq patchReviewReq = new PatchReviewReq(storeIdx, reviewIdx, review.getIsDeleted());
+            storeService.deleteReview(patchReviewReq);
+
+            String result = "";
+            return new BaseResponse<>(result);
+        } catch (BaseException exception) {
+            return new BaseResponse<>((exception.getStatus()));
+        }
+    }
 
 }

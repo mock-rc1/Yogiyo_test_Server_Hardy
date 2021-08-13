@@ -8,17 +8,17 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 public class PostOrderReq {
+    private Integer orderMenuIdx;
     private Integer menuIdx;
     private String menuName;
-    private String menuInfo;
     private Integer menuQuantity;
     private String menuPrice;
     private String userAddress;
     private Integer storeIdx;
     private String totalPrice;
-    private Integer deliveryTip;
-    private String safeDelivery;
-    private String tableware;
+    private String deliveryTip;
+    private Integer safeDelivery;
+    private Integer tableware;
     private String payType;
     private Integer userIdx;
 }
