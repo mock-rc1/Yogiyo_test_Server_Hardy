@@ -10,6 +10,8 @@ com/example/demo/src/store/model/PatchReviewReq.java
  com.example.demo.src.store.model.PatchReviewReq
 com/example/demo/src/order/model/PostOrderMenus.java
  com.example.demo.src.order.model.PostOrderMenus
+com/example/demo/src/event/EventController.java
+ com.example.demo.src.event.EventController
 com/example/demo/src/order/OrderDao.java
  com.example.demo.src.order.OrderDao
 com/example/demo/src/menu/MenuService.java
@@ -56,6 +58,8 @@ com/example/demo/src/menu/MenuDao.java
  com.example.demo.src.menu.MenuDao
 com/example/demo/src/user/model/PostUserReq.java
  com.example.demo.src.user.model.PostUserReq
+com/example/demo/src/event/EventDao.java
+ com.example.demo.src.event.EventDao
 com/example/demo/src/user/model/PostLoginRes.java
  com.example.demo.src.user.model.PostLoginRes
 com/example/demo/src/store/model/GetCategoryRes.java
@@ -68,6 +72,8 @@ com/example/demo/src/user/model/PatchUserReq.java
  com.example.demo.src.user.model.PatchUserReq
 com/example/demo/src/order/model/PatchOrderReq.java
  com.example.demo.src.order.model.PatchOrderReq
+com/example/demo/src/event/EventProvider.java
+ com.example.demo.src.event.EventProvider
 com/example/demo/src/WebSecurityConfig.java
  com.example.demo.src.WebSecurityConfig
 com/example/demo/src/order/OrderProvider.java
@@ -92,6 +98,8 @@ com/example/demo/src/order/model/PostOrderReq.java
  com.example.demo.src.order.model.PostOrderReq
 com/example/demo/src/user/model/GetUserRes.java
  com.example.demo.src.user.model.GetUserRes
+com/example/demo/src/event/model/GetEventBannerRes.java
+ com.example.demo.src.event.model.GetEventBannerRes
 com/example/demo/src/menu/MenuController.java
  com.example.demo.src.menu.MenuController
 com/example/demo/src/store/model/GetStoreCategoryRes.java
@@ -104,3 +112,5 @@ com/example/demo/utils/JwtService.java
  com.example.demo.utils.JwtService
 com/example/demo/src/user/UserProvider.java
  com.example.demo.src.user.UserProvider
+com/example/demo/src/event/model/GetEvents.java
+ com.example.demo.src.event.model.GetEvents
