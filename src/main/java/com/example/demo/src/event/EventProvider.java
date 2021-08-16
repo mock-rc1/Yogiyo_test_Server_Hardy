@@ -31,4 +31,14 @@ public class EventProvider {
             throw new BaseException(DATABASE_ERROR);
         }
     }
+
+    public GetEventInfo getEventInfo(Integer eventIdx) throws BaseException{
+        try{
+            GetEventInfo getEventsInfo = eventDao.getEventInfo(eventIdx);
+            return getEventsInfo;
+        }
+        catch (Exception exception) {
+            throw new BaseException(DATABASE_ERROR);
+        }
+    }
 }

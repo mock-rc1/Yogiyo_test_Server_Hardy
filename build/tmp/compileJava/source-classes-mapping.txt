@@ -20,6 +20,8 @@ com/example/demo/utils/ValidationRegex.java
  com.example.demo.utils.ValidationRegex
 com/example/demo/src/user/model/PostPatchRes.java
  com.example.demo.src.user.model.PostPatchRes
+com/example/demo/src/event/model/Event.java
+ com.example.demo.src.event.model.Event
 com/example/demo/config/BaseResponseStatus.java
  com.example.demo.config.BaseResponseStatus
 com/example/demo/src/order/model/PostOrderRes.java
@@ -46,6 +48,8 @@ com/example/demo/src/user/UserService.java
  com.example.demo.src.user.UserService
 com/example/demo/src/menu/model/GetSingleMenuRes.java
  com.example.demo.src.menu.model.GetSingleMenuRes
+com/example/demo/src/event/model/GetEventInfo.java
+ com.example.demo.src.event.model.GetEventInfo
 com/example/demo/src/menu/model/GetMenuRes.java
  com.example.demo.src.menu.model.GetMenuRes
 com/example/demo/config/BaseException.java
@@ -62,6 +66,8 @@ com/example/demo/src/event/EventDao.java
  com.example.demo.src.event.EventDao
 com/example/demo/src/user/model/PostLoginRes.java
  com.example.demo.src.user.model.PostLoginRes
+com/example/demo/src/event/EventService.java
+ com.example.demo.src.event.EventService
 com/example/demo/src/store/model/GetCategoryRes.java
  com.example.demo.src.store.model.GetCategoryRes
 com/example/demo/src/user/UserDao.java
@@ -80,6 +86,8 @@ com/example/demo/src/order/OrderProvider.java
  com.example.demo.src.order.OrderProvider
 com/example/demo/src/test/TestController.java
  com.example.demo.src.test.TestController
+com/example/demo/src/event/model/PatchEventReq.java
+ com.example.demo.src.event.model.PatchEventReq
 com/example/demo/src/user/model/PostLoginReq.java
  com.example.demo.src.user.model.PostLoginReq
 com/example/demo/src/store/model/Review.java
@@ -98,8 +106,6 @@ com/example/demo/src/order/model/PostOrderReq.java
  com.example.demo.src.order.model.PostOrderReq
 com/example/demo/src/user/model/GetUserRes.java
  com.example.demo.src.user.model.GetUserRes
-com/example/demo/src/event/model/GetEventBannerRes.java
- com.example.demo.src.event.model.GetEventBannerRes
 com/example/demo/src/menu/MenuController.java
  com.example.demo.src.menu.MenuController
 com/example/demo/src/store/model/GetStoreCategoryRes.java

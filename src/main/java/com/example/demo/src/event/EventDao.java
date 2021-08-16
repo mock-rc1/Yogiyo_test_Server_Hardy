@@ -1,6 +1,8 @@
 package com.example.demo.src.event;
 
 import com.example.demo.src.event.model.*;
+import com.example.demo.src.store.model.GetStoreCategoryRes;
+import com.example.demo.src.store.model.PatchReviewReq;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -25,4 +27,20 @@ public class EventDao {
                         rs.getString("bannerUrl")));
     }
 
+    public GetEventInfo getEventInfo(Integer eventIdx){
+        String getEventInfoQuery = "select eventIdx, eventInfoUrl FROM Event where eventIdx =?";
+        Integer getEventInfoParams = eventIdx;
+        return this.jdbcTemplate.queryForObject(getEventInfoQuery,
+                (rs, rowNum) -> new GetEventInfo(
+                        rs.getInt("eventIdx"),
+                        rs.getString("eventInfoUrl")),
+                getEventInfoParams);
+    }
+
+    public int deleteEvent(PatchEventReq patchEventReq){
+        String modifyEventQuery = "update Event set isDeleted = ? where eventIdx = ?";
+        Object[] modifyEventParams = new Object[]{patchEventReq.getIsDeleted(), patchEventReq.getEventIdx()};
+
+        return this.jdbcTemplate.update(modifyEventQuery,modifyEventParams);
+    }
 }
