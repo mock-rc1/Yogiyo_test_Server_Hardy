@@ -82,4 +82,11 @@ public class UserDao {
 
         return this.jdbcTemplate.update(modifyUserNameQuery,modifyUserNameParams);
     }
+
+    public int checkUserIdx(int userIdx) {
+        String checkUserIdxQuery = "select exists(select userIdx from User where userIdx = ? AND User.status != 'N')";
+        int checkUserIdxParams = userIdx;
+
+        return this.jdbcTemplate.queryForObject(checkUserIdxQuery, int.class, checkUserIdxParams);
+    }
 }

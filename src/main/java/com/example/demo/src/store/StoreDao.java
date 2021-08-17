@@ -16,20 +16,20 @@ public class StoreDao {
     private JdbcTemplate jdbcTemplate;
 
     @Autowired
-    public void setDataSource(DataSource dataSource){
+    public void setDataSource(DataSource dataSource) {
         this.jdbcTemplate = new JdbcTemplate(dataSource);
     }
 
-    public List<GetCategoryRes> getCategories(){
+    public List<GetCategoryRes> getCategories() {
         String getCategoriesQuery = "SELECT categoryIdx, categoryName FROM Category";
         return this.jdbcTemplate.query(getCategoriesQuery,
                 (rs, rowNum) -> new GetCategoryRes(
                         rs.getInt("categoryIdx"),
                         rs.getString("categoryName"))
-                );
+        );
     }
 
-    public List<GetStoreCategoryRes> getStoreCategories(){
+    public List<GetStoreCategoryRes> getStoreCategories() {
         String getStoreCategoriesQuery = "SELECT storeIdx, categoryIdx, storeName, storeRating, deliveryTime, deliveryTip, storeAddress, storeImageUrl, storeLogoUrl\n" +
                 "FROM Store;";
         return this.jdbcTemplate.query(getStoreCategoriesQuery,
@@ -43,10 +43,10 @@ public class StoreDao {
                         rs.getString("storeAddress"),
                         rs.getString("storeImageUrl"),
                         rs.getString("storeLogoUrl"))
-                );
+        );
     }
 
-    public List<GetStoreCategoryRes> getStoreCategoriesById(Integer categoryIdx){
+    public List<GetStoreCategoryRes> getStoreCategoriesById(Integer categoryIdx) {
         String getStoreCategoriesByIdQuery = "SELECT storeIdx, categoryIdx, storeName, storeRating, deliveryTime, deliveryTip, storeAddress, storeImageUrl, storeLogoUrl\n" +
                 "FROM Store WHERE categoryIdx =?";
         Integer getStoreCategoriesByIdParams = categoryIdx;
@@ -64,7 +64,7 @@ public class StoreDao {
                 getStoreCategoriesByIdParams);
     }
 
-    public GetStoreRes getStore(int storeIdx){
+    public GetStoreRes getStore(int storeIdx) {
         String getStoreQuery = "select storeIdx, categoryIdx, storeName, storeRating, deliveryTime, minOrderPrice, deliveryTip, storeOpenTime, storePhoneNum, storeAddress, businessName, businessLicenseNum, storeFoodInfo, isDeleted, status, storeImageUrl from Store where storeIdx = ?";
         int getStoreParams = storeIdx;
         return this.jdbcTemplate.queryForObject(getStoreQuery,
@@ -88,7 +88,7 @@ public class StoreDao {
                 getStoreParams);
     }
 
-    public List<GetReviewRes> getReview(int storeIdx){
+    public List<GetReviewRes> getReview(int storeIdx) {
         String getReviewQuery = "SELECT reviewIdx, storeIdx, menuIdx, R.userIdx, userName, reviewRating, reviewContent, reviewImageUrl, tasteRating, amountRating, deliveryRating,\n" +
                 "CASE\n" +
                 "when timestampdiff(hour, createdAt, current_timestamp()) < 24\n" +
@@ -128,10 +128,38 @@ public class StoreDao {
                 getReviewParams);
     }
 
-    public int deleteReview(PatchReviewReq patchReviewReq){
+    public int deleteReview(PatchReviewReq patchReviewReq) {
         String modifyReviewQuery = "update Review set isDeleted = ? where storeIdx = ? and reviewIdx = ?";
         Object[] modifyReviewParams = new Object[]{patchReviewReq.getIsDeleted(), patchReviewReq.getStoreIdx(), patchReviewReq.getReviewIdx()};
 
-        return this.jdbcTemplate.update(modifyReviewQuery,modifyReviewParams);
+        return this.jdbcTemplate.update(modifyReviewQuery, modifyReviewParams);
+    }
+
+    public int checkStoreIdx(int storeIdx) {
+        String checkUserIdxQuery = "select exists(select storeIdx from Store where storeIdx = ? AND Store.status != 'N')";
+        int checkUserIdxParams = storeIdx;
+
+        return this.jdbcTemplate.queryForObject(checkUserIdxQuery, int.class, checkUserIdxParams);
+    }
+
+    public int checkCategoryIdx(int categoryIdx) {
+        String checkUserIdxQuery = "select exists(select categoryIdx from Store where categoryIdx = ? AND Store.status != 'N')";
+        int checkUserIdxParams = categoryIdx;
+
+        return this.jdbcTemplate.queryForObject(checkUserIdxQuery, int.class, checkUserIdxParams);
+    }
+
+    public int checkMenuIdx(int menuIdx) {
+        String checkUserIdxQuery = "select exists(select menuIdx from Menu where menuIdx = ? AND Menu.status != 'N')";
+        int checkUserIdxParams = menuIdx;
+
+        return this.jdbcTemplate.queryForObject(checkUserIdxQuery, int.class, checkUserIdxParams);
+    }
+
+    public int checkReviewIdx(int reviewIdx) {
+        String checkUserIdxQuery = "select exists(select reviewIdx from Review where reviewIdx = ? AND Review.status != 'N')";
+        int checkUserIdxParams = reviewIdx;
+
+        return this.jdbcTemplate.queryForObject(checkUserIdxQuery, int.class, checkUserIdxParams);
     }
 }

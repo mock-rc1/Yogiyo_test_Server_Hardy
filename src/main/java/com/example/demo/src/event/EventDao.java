@@ -43,4 +43,11 @@ public class EventDao {
 
         return this.jdbcTemplate.update(modifyEventQuery,modifyEventParams);
     }
+
+    public int checkEventIdx(int eventIdx) {
+        String checkUserIdxQuery = "select exists(select eventIdx from Event where eventIdx = ? AND Event.status != 'N')";
+        int checkUserIdxParams = eventIdx;
+
+        return this.jdbcTemplate.queryForObject(checkUserIdxQuery, int.class, checkUserIdxParams);
+    }
 }

@@ -40,6 +40,12 @@ public enum BaseResponseStatus {
     POST_USERS_MANDATORY_TRANS(false, 2024, "전자금융거래 이용약관에 동의하셔야 합니다."),
     POST_USERS_MANDATORY_FOURTEEN(false, 2025, "만 14세 이상 이용자만 가입이 가능합니다."),
 
+    // stores
+    EMPTY_CATEGORY_ID(false, 2026, "카테고리 인덱스를 입력해주세요."),
+    EMPTY_STORE_ID(false, 2027, "가게 인덱스를 입력해주세요."),
+    EMPTY_MENU_ID(false, 2028, "메뉴 인덱스를 입력해주세요."),
+    EMPTY_REVIEW_ID(false, 2029, "리뷰 인덱스를 입력해주세요."),
+    EMPTY_EVENT_ID(false, 2030, "이메일 인덱스를 입력해주세요."),
 
     /**
      * 3000 : Response 오류

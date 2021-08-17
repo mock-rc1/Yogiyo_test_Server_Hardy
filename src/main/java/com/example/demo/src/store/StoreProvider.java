@@ -50,6 +50,9 @@ public class StoreProvider {
     }
 
     public List<GetStoreCategoryRes> getStoreCategoriesById(Integer categoryIdx) throws BaseException{
+        if (storeDao.checkCategoryIdx(categoryIdx) == 0) {
+            throw new BaseException(EMPTY_CATEGORY_ID);
+        }
         try{
             List<GetStoreCategoryRes> GetStoreCategoriesRes = storeDao.getStoreCategoriesById(categoryIdx);
             return GetStoreCategoriesRes;
@@ -60,6 +63,9 @@ public class StoreProvider {
     }
 
     public GetStoreRes getStore(int storeIdx) throws BaseException {
+        if (storeDao.checkStoreIdx(storeIdx) == 0) {
+            throw new BaseException(EMPTY_STORE_ID);
+        }
         try {
             GetStoreRes getStoreRes = storeDao.getStore(storeIdx);
             return getStoreRes;
@@ -69,6 +75,9 @@ public class StoreProvider {
     }
 
     public List<GetReviewRes> getReview(int storeIdx) throws BaseException{
+        if (storeDao.checkStoreIdx(storeIdx) == 0) {
+            throw new BaseException(EMPTY_STORE_ID);
+        }
         try{
             List<GetReviewRes> GetReviewsRes = storeDao.getReview(storeIdx);
             return GetReviewsRes;

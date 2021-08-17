@@ -104,7 +104,7 @@ public class UserController {
         try {
             int userIdxByJwt = jwtService.getUserIdx();
             if (userIdx != userIdxByJwt) {
-                return new BaseResponse(FAIL_LOGIN);
+                return new BaseResponse(INVALID_JWT);
             }
             return new BaseResponse<>(new AutoLoginRes(1));
         } catch (BaseException exception) {

@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-import static com.example.demo.config.BaseResponseStatus.DATABASE_ERROR;
+import static com.example.demo.config.BaseResponseStatus.*;
 
 
 @Service
@@ -33,6 +33,9 @@ public class EventProvider {
     }
 
     public GetEventInfo getEventInfo(Integer eventIdx) throws BaseException{
+        if (eventDao.checkEventIdx(eventIdx) == 0) {
+            throw new BaseException(EMPTY_EVENT_ID);
+        }
         try{
             GetEventInfo getEventsInfo = eventDao.getEventInfo(eventIdx);
             return getEventsInfo;
