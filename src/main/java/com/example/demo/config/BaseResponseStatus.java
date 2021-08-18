@@ -47,6 +47,20 @@ public enum BaseResponseStatus {
     EMPTY_REVIEW_ID(false, 2029, "리뷰 인덱스를 입력해주세요."),
     EMPTY_EVENT_ID(false, 2030, "이메일 인덱스를 입력해주세요."),
 
+    // [POST] /orders
+    POST_ORDERS_EMPTY_MENU_ID(false, 2031, "주문 메뉴 인덱스를 입력해주세요."),
+    POST_ORDERS_EMPTY_MENU(false, 2032, "메뉴 이름을 입력해주세요."),
+    POST_ORDERS_LENGTH_MENU(false, 2033, "메뉴 이름는 20자 이하이어야 합니다."),
+    POST_ORDERS_EMPTY_MENU_QUANTITY(false, 2034, "메뉴 수량을 입력해주세요."),
+    POST_ORDERS_EMPTY_MENU_PRICE(false, 2035, "메뉴 가격을 입력해주세요."),
+    POST_ORDERS_EMPTY_USER_ADDRESS(false, 2036, "주소를 입력해주세요."),
+    POST_ORDERS_LENGTH_USER_ADDRESS(false, 2037, "주소를 50자 이내로 적어주시길 바랍니다."),
+    POST_ORDERS_EMPTY_TOTAL_PRICE(false, 2038, "총 가격을 입력해주세요."),
+    POST_ORDERS_EMPTY_DELIVERY_TIP(false, 2039, "배달 요금을 입력해주세요."),
+    POST_ORDERS_EMPTY_SAFE_DELIVERY(false, 2040, "안전 배달 여부를 선택해주세요."),
+    POST_ORDERS_EMPTY_TABLEWARE(false, 2041, "수저포크 필요 여부를 선택해주세요."),
+    POST_ORDERS_EMPTY_PAYTYPE(false, 2042, "결제 방법을 선택해주세요."),
+
     /**
      * 3000 : Response 오류
      */
@@ -59,6 +73,8 @@ public enum BaseResponseStatus {
     QUIT_USER(false,3015,"탈퇴한 유저입니다."),
     FAILED_TO_KAKAO_AUTH(false, 3016, "카카오 유저 정보 조회에 실패하였습니다."),
     FAILED_TO_KAKAO_EMAIL(false, 3017, "카카오 정보에 등록된 이메일이 없습니다. 이메일을 추가 입력해주세요."),
+
+
 
 
     /**

@@ -47,6 +47,34 @@ public class OrderController {
             int userIdxByJwt = jwtService.getUserIdx();
             if (userIdxByJwt != postOrderReq.getUserIdx()) {
                 return new BaseResponse<>(INVALID_USER_JWT);
+            } else if (postOrderReq.getOrderMenuIdx() == null || postOrderReq.getOrderMenuIdx() == 0) {
+                return new BaseResponse<>(POST_ORDERS_EMPTY_MENU_ID);
+            } else if (postOrderReq.getMenuIdx() == null || postOrderReq.getMenuIdx() == 0) {
+                return new BaseResponse<>(EMPTY_MENU_ID);
+            } else if (postOrderReq.getMenuName() == null) {
+                return new BaseResponse<>(POST_ORDERS_EMPTY_MENU);
+            } else if (postOrderReq.getMenuName().length() > 20) {
+                return new BaseResponse<>(POST_ORDERS_LENGTH_MENU);
+            } else if (postOrderReq.getMenuQuantity() == null) {
+                return new BaseResponse<>(POST_ORDERS_EMPTY_MENU_QUANTITY);
+            } else if (postOrderReq.getMenuPrice() == null) {
+                return new BaseResponse<>(POST_ORDERS_EMPTY_MENU_PRICE);
+            } else if (postOrderReq.getUserAddress() == null) {
+                return new BaseResponse<>(POST_ORDERS_EMPTY_USER_ADDRESS);
+            } else if (postOrderReq.getUserAddress().length() > 50) {
+                return new BaseResponse<>(POST_ORDERS_LENGTH_USER_ADDRESS);
+            } else if (postOrderReq.getStoreIdx() == null || postOrderReq.getStoreIdx() == 0) {
+                return new BaseResponse<>(EMPTY_STORE_ID);
+            } else if (postOrderReq.getTotalPrice() == null) {
+                return new BaseResponse<>(POST_ORDERS_EMPTY_TOTAL_PRICE);
+            } else if (postOrderReq.getDeliveryTip() == null) {
+                return new BaseResponse<>(POST_ORDERS_EMPTY_DELIVERY_TIP);
+            } else if (postOrderReq.getSafeDelivery() == null) {
+                return new BaseResponse<>(POST_ORDERS_EMPTY_SAFE_DELIVERY);
+            } else if (postOrderReq.getTableware() == null) {
+                return new BaseResponse<>(POST_ORDERS_EMPTY_TABLEWARE);
+            } else if (postOrderReq.getPayType() == null) {
+                return new BaseResponse<>(POST_ORDERS_EMPTY_PAYTYPE);
             }
             PostOrderRes postOrderRes = orderService.createOrder(postOrderReq);
             return new BaseResponse<>(postOrderRes);
