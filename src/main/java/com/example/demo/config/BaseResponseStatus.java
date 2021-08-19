@@ -50,7 +50,7 @@ public enum BaseResponseStatus {
     // [POST] /orders
     POST_ORDERS_EMPTY_MENU_ID(false, 2031, "주문 메뉴 인덱스를 입력해주세요."),
     POST_ORDERS_EMPTY_MENU(false, 2032, "메뉴 이름을 입력해주세요."),
-    POST_ORDERS_LENGTH_MENU(false, 2033, "메뉴 이름는 20자 이하이어야 합니다."),
+    POST_ORDERS_LENGTH_MENU(false, 2033, "메뉴 이름은 20자 이하이어야 합니다."),
     POST_ORDERS_EMPTY_MENU_QUANTITY(false, 2034, "메뉴 수량을 입력해주세요."),
     POST_ORDERS_EMPTY_MENU_PRICE(false, 2035, "메뉴 가격을 입력해주세요."),
     POST_ORDERS_EMPTY_USER_ADDRESS(false, 2036, "주소를 입력해주세요."),
